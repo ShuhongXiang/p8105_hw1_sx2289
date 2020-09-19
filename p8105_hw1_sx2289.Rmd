@@ -4,5 +4,82 @@ author: Shuhong Xiang
 output: github_document
 ---
 
-This is mu solution to homework 1
+This is my solution to homework 1
+
+```{r}
+library(tidyverse)
+```
+
+
+##Problem 1
+
+Create a data frame with the specified elements. 
+
+```{r create_df}
+prob1_df =
+  tibble(
+   samp = rnorm(10), 
+   samp_gt_0 = samp > 0,
+   char_vec = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"), 
+   factor_vec = factor(c("low", "low", "low", "mod", "mod", "mod", "high", "high", "high", "high"))
+  )
+```
+
+Take the mean of variables in the data frame
+
+```{r}
+mean(pull(prob1_df, samp))
+mean(pull(prob1_df, samp_gt_0))
+mean(pull(prob1_df, char_vec))
+mean(pull(prob1_df, factor_vec))
+```
+I can take the mean of numbers and logical but not character or factor. 
+
+```{r}
+as.numeric(pull(prob1_df, samp))
+as.numeric(pull(prob1_df, samp_gt_0))
+as.numeric(pull(prob1_df, char_vec))
+as.numeric(pull(prob1_df, factor_vec))
+```
+
+```{r}
+as.numeric(pull(prob1_df, samp_gt_0))*pull(prob1_df, samp)
+```
+
+##Problem2
+
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+
+A short description of the penguins data set:
+
+The data set includes species, island, bill_length_mm, bill_depth_mm, body_mass_g, sex and year of the penguins. The species, island, year and sex are characteristic factors. The bill_length_MM and bill_depth_MM are numerical factors.The data set has 344 rows and 8 columns corresponding to the eight variables. The mean of the flipper length is NA due the missing data set.
+
+The size of the data set:
+
+```{r}
+nrow(penguins)
+ncol(penguins)
+```
+
+The the mean flipper length:
+
+```{r}
+mean(pull(penguins, flipper_length_mm))
+```
+
+Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable :
+
+```{r}
+library(ggplot2)
+```
+Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable:
+
+```{r}
+scatterplot = ggplot(penguins, aes(x = bill_length_mm, y = bill_length_mm), color = species)
+
+ggsave("catterplot of flipper lengthin mm.png")
+```
 
