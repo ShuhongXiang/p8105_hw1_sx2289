@@ -1,0 +1,8 @@
+---
+title: "Homwork 1"
+author: Shuhong Xiang
+output: github_document
+---
+
+This is mu solution to homework 1
+
